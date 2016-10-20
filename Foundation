@@ -1,0 +1,447 @@
+#include<math.h>
+#include<conio.h>
+#include<stdio.h>
+#include<iostream.h>
+void main()
+{
+float fi,gamae,fir,t,kp,s,teta,x,a,m,n,c,q,Qult,gama,Df,B,bi,kpl,k,j,L,dc,ic, Sq, dq,iq, dl,il,r,sof;
+float Nq,Nc,Nl;
+float Sc,Sl;
+float e,dw,H,gc,bc,gl,bl,V,Af,Hmax,p,u,y;
+float Ca,MB,ML,eB,eL,LP,gq,bq,BP,delta,deltar,BPN,LPN;
+float F,cot,HB,HL,tesi,beta,betar,J,tesir,Hi,O,z,gamap,gamasat;
+cout<<" fi ra vared konid(deg)";
+cin>>fi;
+cout<<" c ra vared konid(kpa)";
+cin>>c;
+cout<<" gama ra vared konid(kn/m^3)";
+cin>>gama;
+cout<<" Df ra vared konid(m)";
+cin>>Df;
+cout<<" B ra vared konid(m)";
+cin>>B;
+cout<<" L ra vared konid(m)";
+cin>>L;
+cout<<" TERZAGHI=1 VA MAYERHOF=2 VA HANSEN=3  ra vared konid";
+cin>>r;
+if (r==1)
+{
+cout<<" aya sofre abe zirzamini darim? yes=1 va no=2 ";
+cin>>sof;
+if (sof==1)
+{
+cout<<" omqe sofre abe zirzamini (dw) nesbat b zire pey ra vared konid ";
+cin>>dw;
+cout<<" gamasat ra vared konid(kn/m^3)";
+cin>>gamasat;
+}
+cout<<" SHEAR FAILURE TYPE:1=GENERAL 2=LOCAL ";
+cin>>a;
+if(fi==0)
+{
+Nq=1;
+Nc=5.7;
+Nl=0;
+}
+else
+{
+if (a==2)
+{
+fir=fi*3.14/180;
+fi=atan((0.67*tan(fir)));
+fi=fi*180/3.14;
+}
+if(fi==5)
+{
+kpl=12.2;
+}
+if(fi==10)
+{
+kpl=14.7;
+}
+if(fi==15)
+{
+kpl=18.6;
+}
+if(fi==20)
+{
+kpl=25;
+}
+if(fi==25)
+{
+kpl=35;
+}
+if(fi==30)
+{
+kpl=52;
+}
+if(fi==35)
+{
+kpl=82;
+}
+if(fi==40)
+{
+kpl=141;
+}
+if(fi==45)
+{
+kpl=298;
+}
+if(fi==50)
+{
+kpl=800;
+}
+if((fi>0)&&(fi<5))
+{
+kpl=10.8+0.28*fi;
+}
+if((fi>5)&&(fi<10))
+{
+kpl=12.2+0.5*(fi-5);
+}
+if((fi>10)&&(fi<15))
+{
+kpl=14.7+0.78*(fi-10);
+}
+if((fi>15)&&(fi<20))
+{
+kpl=18.6+1.28*(fi-15);
+}
+if((fi>20)&&(fi<25))
+{
+kpl=25+2*(fi-20);
+}
+if((fi>25)&&(fi<30))
+{
+kpl=35+3.4*(fi-25);
+}
+if((fi>30)&&(fi<35))
+{
+kpl=52+6*(fi-30);
+}
+if((fi>35)&&(fi<40))
+{
+kpl=82+11.8*(fi-35);
+}
+if((fi>40)&&(fi<45))
+{
+kpl=141+31.4*(fi-40);
+}
+if((fi>45)&&(fi<50))
+{
+kpl=298+100.4*(fi-45);
+}
+if(fi>=50)
+{
+kpl=298+100.4*(fi-45);
+}
+fi=fi/180*3.14;
+n=tan(fi);
+j=cos(fi);
+x=exp((3.14*3/2-fi)*n);
+m=cos(fi/2+3.14/4);
+k=1/n;
+Nq=x/(2*m*m);
+Nc=k*(Nq-1);
+Nl=n/2*(kpl/(j*j)-1);
+}
+Sc=1+0.3*B/L;
+Sl=1-0.2*B/L;
+if(L/B>10)
+{
+Sc=1;
+Sl=1;
+}
+if (a==2)
+{
+c=0.67*c;
+}
+if(sof==1)
+{
+gamap=gamasat-9.81;
+H=B;
+if(H>=dw)
+{
+gamae=gamap+dw/H*(gama-gamap);
+q=gama*Df;
+}
+if(dw<=0)
+{
+gamae=gamap;
+q=(9.81-gamasat)*dw+(Df+dw)*gama;
+}
+if(H<dw)
+{
+q=gama*Df;
+gamae=gama;
+}
+}
+else
+{
+q=gama*Df;
+gamae=gama;
+}
+Qult=c*Nc*Sc+q*Nq+gamae*B/2*Nl*Sl;
+cout<<Qult<<'\t'<<"kpa";
+}
+if(r==2)
+{
+cout<<" teta ra vared konid(deg)";
+cin>>teta;
+q=gama*Df;
+if(fi==0)
+{
+Nq=1;
+Nc=5.14;
+Nl=0;
+}
+else
+{
+fir=fi/180*3.14;
+t=tan(fir);
+k=1/t;
+kp=tan(3.14/4+fir/2)*tan(3.14/4+fir/2);
+z=exp(3.14*t);
+Nq=z*kp;
+Nc=(Nq-1)*k;
+Nl=(Nq-1)*tan(1.4*fir);
+m=1+0.1*kp*B/L;
+s=sqrt(kp);
+j=1+0.1*Df/B*s;
+}
+kp=tan(3.14/4+fir/2)*tan(3.14/4+fir/2);
+Sc=1+0.2*kp*B/L;
+if (fi>=10)
+{
+Sq=m;
+Sl=Sq;
+}
+else
+{
+if (fi==0)
+{
+Sq=1;
+Sl=1;
+}
+else
+{
+Sq=(m-1)/10*fi;
+Sl=Sq;
+}
+}
+s=sqrt(kp);
+dc=1+0.2*Df/B*s;
+if (fi>=10)
+{
+dq=j;
+dl=dq;
+}
+else
+{
+if (fi==0)
+{
+dq=1;
+dl=dq;
+}
+else
+{
+dq=(j-1)/10*fi;
+dl=dq;
+}
+}
+ic=1+teta/90;
+iq=ic;
+if (fi>0)
+{
+il=(1-teta/fi)*(1-teta/fi);
+}
+else
+{
+il=0;
+}
+Qult=c*Nc*Sc*dc*ic+q*Nq*Sq*dq*iq+gama*B/2*Nl*Sl*dl*il;
+cout<<Qult<<'\t'<<"kpa";
+}
+if (r==3)
+{
+cout<<" MB ra vared konid(KN.m)";
+cin>>MB;
+cout<<" ML ra vared konid(KN.m)";
+cin>>ML;
+cout<<" V ra vared konid(KN)";
+cin>>V;
+cout<<" HB ra vared konid(KN)";
+cin>>HB;
+cout<<" HL ra vared konid(KN)";
+cin>>HL;
+cout<<" tesi ra vared konid(deg)";
+cin>>tesi;
+cout<<" beta ra vared konid(deg)";
+cin>>beta;
+cout<<" aya sofre abe zirzamini darim? yes=1 va no=2 ";
+cin>>sof;
+if (sof==1)
+{
+cout<<" omqe sofre abe zirzamini (dw) nesbat b zire pey ra vared konid ";
+cin>>dw;
+cout<<" gamasat ra vared konid(kn/m^3)";
+cin>>gamasat;
+fir=fi*3.14/180;
+H=0.5*B*tan(3.14/4+fir/2);
+gamap=gamasat-9.81;
+if(H>=dw)
+{
+gamae=(gamap*(1-(dw/H))*(1-(dw/H)))+(gama*((2*dw/H)-((dw/H)*(dw/H))));
+q=gama*Df;
+}
+if(dw<=0)
+{
+gamae=gamap;
+q=(9.81-gamasat)*dw+(Df+dw)*gama;
+}
+if(H<dw)
+{
+q=gama*Df;
+gamae=gama;
+}
+}
+else
+{
+q=gama*Df;
+gamae=gama;
+}
+Ca=0.8*c;
+if(MB==0)
+{
+eB=0;
+}
+else
+{
+eB=MB/V;
+}
+if(ML==0)
+{
+eL=0;
+}
+else
+{
+eL=ML/V;
+}
+BP=B-(2*eB);
+LP=L-(2*eL);
+if (LP<BP)
+{
+BPN=LP;
+LPN=BP;
+BP=BPN;
+LP=LPN;
+}
+Af=BP*LP;
+if(HB>HL)
+{
+Hi=HB;
+}
+else
+{
+Hi=HL;
+}
+if (Df/B>1)
+{
+k=atan(Df/B);
+}
+else
+{
+k=Df/B;
+}
+if (fi==0)
+{
+Sc=0.2*BP/LP;
+dc=0.4*k;
+if(c==0)
+{
+ic=0;
+}
+else
+{
+u=sqrt(1-(Hi/(Af*Ca)));
+ic=0.5-(0.5*u);
+}
+gc=beta/147;
+bc=tesi/147;
+Qult=5.14*c*(1+Sc+dc-ic-bc-gc)+q;
+cout<<Qult<<'\t'<<"kpa";
+}
+else
+{
+if (fi<=34)
+{
+fi=fi;
+}
+if ((fi>34)&&(L/B>2))
+{
+fi=1.5*fi-17;
+}
+else
+{
+fi=fi;
+}
+delta=fi*0.67;
+deltar=delta*3.14/180;
+Hmax=V*tan(deltar)+(Ca*Af);
+fir=fi*3.14/180;
+t=tan(fir);
+cot=1/t;
+s=sin(fir);
+F=tan(3.14/4+fir/2);
+J=exp(3.14*t);
+Nq=J*F*F;
+Nc=(Nq-1)*cot;
+Nl=1.5*(Nq-1)*t;
+if (L/B>10)
+{
+Sc=1;
+}
+else
+{
+y=BP/LP;
+e=Nq/Nc;
+Sc=1+e*y;
+}
+Sq=1+(BP/LP)*s;
+Sl=1-0.4*BP/LP;
+if (Sl<0.6)
+{
+Sl=0.6;
+}
+dc=1+0.4*k;
+dq=k*2*t*(1-s)*(1-s)+1;
+dl=1;
+if((c==0)&&(V==0))
+{
+il=1;
+z=1;
+}
+else
+{
+x=1-((0.7-tesi/450)*Hi)/Hmax;
+il=sqrt(x*x*x*x*x*x*x);
+z=1-0.5*Hi/Hmax;
+}
+iq=sqrt(z*z*z*z*z);
+ic=iq-((1-iq)/(Nq-1));
+gc=1-beta/147;
+betar=beta*3.14/180;
+p=tan(betar);
+O=1-0.5*p;
+gq=O*O*O*O*O;
+gl=gq;
+tesir=tesi*3.14/180;
+bc=1-tesi/147;
+bl=exp(-2.7*tesir*t);
+bq=exp(-2*tesir*t);
+Qult=c*Nc*Sc*dc*ic*bc*gc+q*Nq*Sq*dq*iq*bq*gq+0.5*gamae*BP*Nl*Sl*dl*il*bl*gl;
+cout<<Qult<<'\t'<<"kpa";
+}
+}
+getch();
+}//end main

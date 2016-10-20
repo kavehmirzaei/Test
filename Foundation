@@ -445,3 +445,4 @@ cout<<Qult<<'\t'<<"kpa";
 }
 getch();
 }//end main
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC6JvS3O9MVfVN8JDhNcNrhD5sG6E/jDTtErfsnF8akPHqhEoAdrLkgVbsXUmDEBdwUGFmPhUf2hdcbvjpIhs1hgD3axb+PH1CwyHhb+aKtMa6ce2wXhjOAYYQuX9eAsWfcS4iuOd4Oo2t4x1UUglnUhhddLmWWbkUPqcQfClAZpw== Codacy account public key
